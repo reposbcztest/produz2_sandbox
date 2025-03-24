@@ -1,0 +1,7 @@
+.background {
+  height: 100vh;
+  background-image: url("http://www.abcz.org.br/common/default/images/logos/logo.svg");
+  background-repeat: no-repeat;
+  background-size: 100% 50%;
+  background-position-y: 40%;
+}

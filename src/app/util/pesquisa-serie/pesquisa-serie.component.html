@@ -1,0 +1,69 @@
+<div class="grid pt-3">
+  <!-- ESPAÇADOR -->
+  <div class="col-4"></div>
+
+  <div class="col-4">
+    <div class="p-inputgroup">
+      <button
+        type="button"
+        pButton
+        icon="pi pi-search"
+        styleClass="p-button-success"
+        (click)="buscaSerieResultado()"
+      ></button>
+      <span class="p-float-label p-input-icon-right">
+        <input
+          type="text"
+          pInputText
+          class="p-inputtext-sm"
+          [style]="{ width: '123%' }"
+          [ngModel]="serieBusca"
+          (ngModelChange)="serieBusca = $event.toUpperCase()"
+          (keyup.enter)="buscaSerieResultado()"
+        />
+        <label>Série Alfabética</label>
+      </span>
+      <button
+        type="button"
+        pButton
+        icon="pi pi-times"
+        styleClass="p-button-success"
+        (click)="limpaSerieResultado()"
+      ></button>
+    </div>
+  </div>
+
+  <!-- ESPAÇADOR -->
+  <div class="col-4"></div>
+</div>
+
+<div class="grid pt-4 pl-3">
+  <p-table
+    id="tbPesquisa"
+    [value]="serieResultado"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    [style]="{ width: '120%'}"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Cód. Criador</th>
+        <th>Nome do Criador</th>
+        <th>Cód. Fazenda</th>
+        <th>Nome da Fazenda</th>
+        <th>Cidade da Fazenda</th>
+        <th>UF da Fazenda</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-serie>
+      <tr>
+        <td>{{ serie.codCriador }}</td>
+        <td>{{ serie.nomCriador }}</td>
+        <td>{{ serie.codFazenda }}</td>
+        <td>{{ serie.nomFazenda }}</td>
+        <td>{{ serie.cidade }}</td>
+        <td>{{ serie.uf }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

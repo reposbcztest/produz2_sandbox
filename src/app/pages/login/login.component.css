@@ -1,0 +1,20 @@
+:host ::ng-deep .loginCard {
+  border-top: 5px solid #1b5ea9;
+  border-bottom: 5px solid #1b5ea9;
+}
+
+.nome {
+  font-family: "frutiger", sans-serif;
+  color: #1b5ea9;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.espacoLinha{
+    margin-top: 1em;
+}
+
+.msg{
+  color: red;
+  font-weight: 700;
+}

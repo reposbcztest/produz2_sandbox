@@ -1,0 +1,12 @@
+.background {
+  width: auto;
+  height: auto;
+  background-image: url("/assets/images/genealogiaBack.png");
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-position: 140px;
+}
+
+.disabledStyle {
+  background-color: #eeeee0;
+}

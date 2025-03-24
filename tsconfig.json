@@ -1,0 +1,56 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@produz/enum/*": [
+        "app/enum/*"
+      ],
+      "@produz/interfaces/*": [
+        "app/interfaces/*"
+      ],
+      "@produz/layout/*": [
+        "app/layout/*"
+      ],
+      "@produz/pages/*": [
+        "app/pages/*"
+      ],
+      "@produz/service/*": [
+        "app/service/*"
+      ],
+      "@produz/util/*": [
+        "app/util/*"
+      ]
+    },
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strictNullChecks": false,
+    "strict": true,
+    "noImplicitOverride": true,
+    "noUnusedLocals": false,
+    "noImplicitAny": false,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "es2020",
+    "lib": [
+      "es2020",
+      "dom"
+    ],
+    "useDefineForClassFields": false
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}

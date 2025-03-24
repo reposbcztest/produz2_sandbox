@@ -1,0 +1,1541 @@
+<!-- style="border-style: solid" -->
+<p-tabView>
+  <!-- DADOS DO ANIMAL -->
+  <p-tabPanel header="Dados do Animal" class="divDadosAnimal">
+    <div class="grid flex-nowrap pt-5">
+      <!-- Coluna da Esquerda -->
+      <div class="col-fixed">
+        <div>
+          <!-- Botões -->
+          <p-tieredMenu [model]="itemsMenu"></p-tieredMenu>
+        </div>
+
+        <!-- Serviços Adicionais -->
+        <div class="divHorizontal" style="text-align: center">
+          <p-sidebar
+            [(visible)]="displayServicosAdicionais"
+            [baseZIndex]="10000"
+          >
+            <p-panelMenu [model]="itemsServicosAdicionais"></p-panelMenu>
+          </p-sidebar>
+          <button
+            pButton
+            class="p-button-success p-button-raised"
+            (click)="displayServicosAdicionais = true"
+            icon="pi pi-plus"
+            pTooltip="Serviços Adicionais"
+          ></button>
+        </div>
+      </div>
+
+      <!-- Coluna do Meio -->
+      <div class="col">
+        <div class="grid">
+          <div class="col-12 sm:col-10 md:col-7 lg:col-5 lg:col-offset-0">
+            <div class="grid">
+              <!-- Tipo do Produto -->
+              <div class="col-3">
+                <span
+                  class="p-float-label"
+                  [ngClass]="{ disabledStyle: habilitado }"
+                >
+                  <p-dropdown
+                    inputId="tipoProduto"
+                    [autoDisplayFirst]="false"
+                    [options]="tiposProduto"
+                    [(ngModel)]="tipoProdutoSelecionado"
+                    optionLabel="name"
+                    [style]="{ width: '100%' }"
+                    [ngClass]="{ 'p-disabled': habilitado }"
+                  ></p-dropdown>
+                  <label>Tipo do Produto (*)</label>
+                </span>
+              </div>
+
+              <!-- Registro do Produto -->
+              <div class="col ajusteTexto" style="text-align: center">
+                <h2 class="registro">Registro: {{ registro }}</h2>
+              </div>
+
+              <!-- Deca -->
+              <div class="col-1">
+                <span
+                  class="p-float-label"
+                  [ngClass]="{ disabledStyle: habilitado }"
+                >
+                  <input
+                    id="deca"
+                    type="text"
+                    pInputText
+                    class="p-inputtext-sm"
+                    value="{{ deca }}"
+                    [style]="{ width: '100%' }"
+                    [ngClass]="{ 'p-disabled': habilitado }"
+                  />
+                  <label>Deca</label>
+                </span>
+              </div>
+
+              <!-- iABCZ -->
+              <div class="col-1">
+                <span
+                  class="p-float-label"
+                  [ngClass]="{ disabledStyle: habilitado }"
+                >
+                  <input
+                    id="iabcz"
+                    type="text"
+                    pInputText
+                    class="p-inputtext-sm"
+                    value="{{ iABCZ }}"
+                    [style]="{ width: '100%' }"
+                    [ngClass]="{ 'p-disabled': habilitado }"
+                  />
+                  <label>iABCZ</label>
+                </span>
+              </div>
+
+              <!-- F% -->
+              <div class="col-1">
+                <span
+                  class="p-float-label"
+                  [ngClass]="{ disabledStyle: habilitado }"
+                >
+                  <input
+                    id="F"
+                    type="text"
+                    pInputText
+                    class="p-inputtext-sm"
+                    value="{{ F }}"
+                    [style]="{ width: '100%' }"
+                    [ngClass]="{ 'p-disabled': habilitado }"
+                  />
+                  <label>F%</label>
+                </span>
+              </div>
+            </div>
+
+            <div class="grid">
+              <div class="col">
+                <div class="grid">
+                  <div class="col">
+                    <p-fieldset>
+                      <div class="grid">
+                        <!-- Serie -->
+                        <div class="col-2">
+                          <span
+                            class="p-float-label"
+                            [ngClass]="{ disabledStyle: habilitado }"
+                          >
+                            <input
+                              type="text"
+                              pInputText
+                              class="p-inputtext-sm"
+                              value="{{ serie }}"
+                              [style]="{ width: '100%' }"
+                              [ngClass]="{ 'p-disabled': habilitado }"
+                            />
+                            <label>Série</label>
+                          </span>
+                        </div>
+
+                        <!-- Raca -->
+                        <div class="col">
+                          <span
+                            class="p-float-label"
+                            [ngClass]="{ disabledStyle: habilitado }"
+                          >
+                            <p-dropdown
+                              [options]="racas"
+                              [(ngModel)]="racaSelecionada"
+                              optionLabel="nomeFiltro"
+                              [filter]="true"
+                              filterBy="nomeFiltro"
+                              [showClear]="true"
+                              placeholder="Raça"
+                              inputId="raca"
+                              [style]="{ width: '100%' }"
+                              [ngClass]="{ 'p-disabled': habilitado }"
+                              [resetFilterOnHide]="true"
+                            >
+                              <ng-template pTemplate="selectedItem">
+                                <div *ngIf="racaSelecionada">
+                                  <div>
+                                    {{ racaSelecionada.nomeFiltro }}
+                                  </div>
+                                </div>
+                              </ng-template>
+                              <ng-template let-raca pTemplate="item">
+                                <div class="raca-item">
+                                  <div>{{ raca.nomeFiltro }}</div>
+                                </div>
+                              </ng-template>
+                            </p-dropdown>
+                            <label>Raça (*)</label>
+                          </span>
+                        </div>
+
+                        <!-- Categoria -->
+                        <div class="col">
+                          <span
+                            class="p-float-label"
+                            [ngClass]="{ disabledStyle: habilitado }"
+                          >
+                            <p-dropdown
+                              [options]="categorias"
+                              [(ngModel)]="categoriaSelecionada"
+                              optionLabel="nomeFiltro"
+                              [filter]="true"
+                              filterBy="nomeFiltro"
+                              [showClear]="true"
+                              placeholder="Categoria"
+                              inputId="categoria"
+                              [style]="{ width: '100%' }"
+                              [ngClass]="{ 'p-disabled': habilitado }"
+                              [resetFilterOnHide]="true"
+                            >
+                              <ng-template pTemplate="selectedItem">
+                                <div *ngIf="categoriaSelecionada">
+                                  <div>
+                                    {{ categoriaSelecionada.nomeFiltro }}
+                                  </div>
+                                </div>
+                              </ng-template>
+                              <ng-template let-categoria pTemplate="item">
+                                <div class="categoria-item">
+                                  <div>{{ categoria.nomeFiltro }}</div>
+                                </div>
+                              </ng-template>
+                            </p-dropdown>
+                            <label>Categoria (*)</label>
+                          </span>
+                        </div>
+                      </div>
+
+                      <div class="grid divHorizontal">
+                        <!-- Proprietário -->
+                        <div class="col">
+                          <span
+                            class="p-float-label"
+                            [ngClass]="{ disabledStyle: habilitado }"
+                          >
+                            <p-dropdown
+                              [options]="proprietarios"
+                              [(ngModel)]="proprietarioSelecionado"
+                              optionLabel="name"
+                              [filter]="true"
+                              filterBy="name"
+                              [showClear]="true"
+                              placeholder="Proprietário"
+                              inputId="proprietario"
+                              [style]="{ width: '100%' }"
+                              [ngClass]="{ 'p-disabled': habilitado }"
+                              [resetFilterOnHide]="true"
+                            >
+                              <ng-template pTemplate="selectedItem">
+                                <div *ngIf="proprietarioSelecionado">
+                                  <div>
+                                    {{ proprietarioSelecionado.name }}
+                                  </div>
+                                </div>
+                              </ng-template>
+                              <ng-template let-proprietario pTemplate="item">
+                                <div class="proprietario-item">
+                                  <div>{{ proprietario.name }}</div>
+                                </div>
+                              </ng-template>
+                            </p-dropdown>
+                            <label>Proprietário (*)</label>
+                          </span>
+                        </div>
+
+                        <!-- Fazenda -->
+                        <div class="col">
+                          <span
+                            class="p-float-label"
+                            [ngClass]="{ disabledStyle: habilitado }"
+                          >
+                            <p-dropdown
+                              [options]="fazendas"
+                              [(ngModel)]="fazendaSelecionada"
+                              optionLabel="name"
+                              [filter]="true"
+                              filterBy="name"
+                              [showClear]="true"
+                              placeholder="Fazenda"
+                              inputId="fazenda"
+                              [style]="{ width: '100%' }"
+                              [ngClass]="{ 'p-disabled': habilitado }"
+                              [resetFilterOnHide]="true"
+                            >
+                              <ng-template pTemplate="selectedItem">
+                                <div *ngIf="fazendaSelecionada">
+                                  <div>
+                                    {{ fazendaSelecionada.name }}
+                                  </div>
+                                </div>
+                              </ng-template>
+                              <ng-template let-fazenda pTemplate="item">
+                                <div class="fazenda-item">
+                                  <div>{{ fazenda.name }}</div>
+                                </div>
+                              </ng-template>
+                            </p-dropdown>
+                            <label>Fazenda (*)</label>
+                          </span>
+                        </div>
+                      </div>
+
+                      <div class="grid divHorizontal">
+                        <!-- Criador -->
+                        <div class="col-6" [hidden]="mostraTelaResumida">
+                          <span
+                            class="p-float-label"
+                            [ngClass]="{ disabledStyle: habilitado }"
+                          >
+                            <p-dropdown
+                              [options]="criadores"
+                              [(ngModel)]="criadorSelecionado"
+                              optionLabel="name"
+                              [filter]="true"
+                              filterBy="name"
+                              [showClear]="true"
+                              placeholder="Criador"
+                              inputId="criador"
+                              [style]="{ width: '100%' }"
+                              [ngClass]="{ 'p-disabled': habilitado }"
+                              [resetFilterOnHide]="true"
+                            >
+                              <ng-template pTemplate="selectedItem">
+                                <div *ngIf="criadorSelecionado">
+                                  <div>
+                                    {{ criadorSelecionado.name }}
+                                  </div>
+                                </div>
+                              </ng-template>
+                              <ng-template let-criador pTemplate="item">
+                                <div class="criador-item">
+                                  <div>{{ criador.name }}</div>
+                                </div>
+                              </ng-template>
+                            </p-dropdown>
+                            <label>Criador (*)</label>
+                          </span>
+                        </div>
+                      </div>
+                    </p-fieldset>
+
+                    <p-fieldset>
+                      <div class="grid">
+                        <!-- RGN -->
+                        <div class="col">
+                          <span
+                            class="p-float-label"
+                            [ngClass]="{ disabledStyle: habilitado }"
+                          >
+                            <input
+                              type="text"
+                              pInputText
+                              class="p-inputtext-sm"
+                              value="{{ rgn }}"
+                              [style]="{ width: '100%' }"
+                              [ngClass]="{ 'p-disabled': habilitado }"
+                            />
+                            <label>RGN</label>
+                          </span>
+                        </div>
+
+                        <!-- RGD -->
+                        <div class="col">
+                          <span
+                            class="p-float-label"
+                            [ngClass]="{ disabledStyle: habilitado }"
+                          >
+                            <input
+                              type="text"
+                              pInputText
+                              class="p-inputtext-sm"
+                              value="{{ rgd }}"
+                              [style]="{ width: '100%' }"
+                              [ngClass]="{ 'p-disabled': habilitado }"
+                            />
+                            <label>RGD</label>
+                          </span>
+                        </div>
+
+                        <!-- Sexo -->
+                        <div class="col" [hidden]="mostraTelaResumida">
+                          <span
+                            class="p-float-label"
+                            [ngClass]="{ disabledStyle: habilitado }"
+                          >
+                            <p-dropdown
+                              inputId="sexo"
+                              [autoDisplayFirst]="false"
+                              [options]="sexos"
+                              [(ngModel)]="sexoSelecionado"
+                              optionLabel="name"
+                              [style]="{ width: '100%' }"
+                              [ngClass]="{ 'p-disabled': habilitado }"
+                            ></p-dropdown>
+                            <label>Sexo (*)</label>
+                          </span>
+                        </div>
+
+                        <!-- Apelido -->
+                        <div class="col" [hidden]="mostraTelaResumida">
+                          <span
+                            class="p-float-label"
+                            [ngClass]="{ disabledStyle: habilitado }"
+                          >
+                            <input
+                              type="text"
+                              pInputText
+                              class="p-inputtext-sm"
+                              value="{{ apelido }}"
+                              [style]="{ width: '100%' }"
+                              [ngClass]="{ 'p-disabled': habilitado }"
+                            />
+                            <label>Apelido</label>
+                          </span>
+                        </div>
+
+                        <!-- Brinco -->
+                        <div class="col-4">
+                          <span
+                            class="p-float-label"
+                            [ngClass]="{ disabledStyle: habilitado }"
+                          >
+                            <input
+                              type="text"
+                              pInputText
+                              class="p-inputtext-sm"
+                              value="{{ brinco }}"
+                              [style]="{ width: '100%' }"
+                              [ngClass]="{ 'p-disabled': habilitado }"
+                            />
+                            <label>Brinco</label>
+                          </span>
+                        </div>
+                      </div>
+
+                      <div class="grid divHorizontal">
+                        <!-- Prefixo -->
+                        <div class="col-3" [hidden]="mostraTelaResumida">
+                          <span
+                            class="p-float-label"
+                            [ngClass]="{ disabledStyle: habilitado }"
+                          >
+                            <input
+                              type="text"
+                              pInputText
+                              class="p-inputtext-sm"
+                              value="{{ nomeProduto?.prefixo }}"
+                              [style]="{ width: '100%' }"
+                              [ngClass]="{ 'p-disabled': habilitado }"
+                            />
+                            <label>Prefixo</label>
+                          </span>
+                        </div>
+
+                        <!-- Nome -->
+                        <div class="col-6">
+                          <span
+                            class="p-float-label"
+                            [ngClass]="{ disabledStyle: habilitado }"
+                          >
+                            <input
+                              type="text"
+                              pInputText
+                              class="p-inputtext-sm"
+                              value="{{ nomeProduto?.nome }}"
+                              [style]="{ width: '100%' }"
+                              [ngClass]="{ 'p-disabled': habilitado }"
+                            />
+                            <label>Nome (*)</label>
+                          </span>
+                        </div>
+
+                        <!-- Sufixo -->
+                        <div class="col-3" [hidden]="mostraTelaResumida">
+                          <span
+                            class="p-float-label"
+                            [ngClass]="{ disabledStyle: habilitado }"
+                          >
+                            <input
+                              type="text"
+                              pInputText
+                              class="p-inputtext-sm"
+                              value="{{ nomeProduto?.sufixo }}"
+                              [style]="{ width: '100%' }"
+                              [ngClass]="{ 'p-disabled': habilitado }"
+                            />
+                            <label>Sufixo</label>
+                          </span>
+                        </div>
+                      </div>
+
+                      <div class="grid divHorizontal">
+                        <!-- Pelagem -->
+                        <div class="col-6" [hidden]="mostraTelaResumida">
+                          <span
+                            class="p-float-label"
+                            [ngClass]="{ disabledStyle: habilitado }"
+                          >
+                            <p-dropdown
+                              [options]="pelagens"
+                              [(ngModel)]="pelagemSelecionada"
+                              optionLabel="name"
+                              [filter]="true"
+                              filterBy="name"
+                              [showClear]="true"
+                              placeholder="Pelagem"
+                              inputId="pelagem"
+                              [style]="{ width: '100%' }"
+                              [ngClass]="{ 'p-disabled': habilitado }"
+                              [resetFilterOnHide]="true"
+                            >
+                              <ng-template pTemplate="selectedItem">
+                                <div *ngIf="pelagemSelecionada">
+                                  <div>
+                                    {{ pelagemSelecionada.name }}
+                                  </div>
+                                </div>
+                              </ng-template>
+                              <ng-template let-pelagem pTemplate="item">
+                                <div class="pelagem-item">
+                                  <div>{{ pelagem.name }}</div>
+                                </div>
+                              </ng-template>
+                            </p-dropdown>
+                            <label>Pelagem (*)</label>
+                          </span>
+                        </div>
+
+                        <!-- PN -->
+                        <div class="col-3" [hidden]="mostraTelaResumida">
+                          <span
+                            class="p-float-label"
+                            [ngClass]="{ disabledStyle: habilitado }"
+                          >
+                            <input
+                              type="text"
+                              pInputText
+                              class="p-inputtext-sm"
+                              value="{{ pn }}"
+                              [style]="{ width: '100%' }"
+                              [ngClass]="{ 'p-disabled': habilitado }"
+                            />
+                            <label>P.N. (*)</label>
+                          </span>
+                        </div>
+                      </div>
+
+                      <div class="grid divHorizontal" >
+                        <!-- Data de Nascimento -->
+                        <div class="col-3" [hidden]="mostraTelaResumida">
+                          <span
+                            class="p-float-label"
+                            [ngClass]="{ disabledStyle: habilitado }"
+                          >
+                            <p-calendar
+                              [(ngModel)]="dataNasc"
+                              [showIcon]="true"
+                              [style]="{ width: '100%' }"
+                              [ngClass]="{ 'p-disabled': habilitado }"
+                            ></p-calendar>
+                            <label class="ajusteLabel"
+                              >Data de Nascimento</label
+                            >
+                          </span>
+                        </div>
+
+                        <!-- Idade Extensa -->
+                        <div class="col-3 ajusteTexto" [hidden]="mostraTelaResumida">
+                          <h6 class="textoDestaque">{{ idadeExtensa }}</h6>
+                        </div>
+
+                        <!-- Categoria de Idade -->
+                        <div class="col-6" [hidden]="mostraTelaResumida">
+                          <span
+                            class="p-float-label"
+                            [ngClass]="{ disabledStyle: habilitado }"
+                          >
+                            <p-dropdown
+                              [options]="categoriasIdade"
+                              [(ngModel)]="categoriaIdadeSelecionada"
+                              optionLabel="name"
+                              [showClear]="true"
+                              placeholder="categoria de Idade"
+                              inputId="categoriaIdade"
+                              [style]="{ width: '100%' }"
+                              [ngClass]="{ 'p-disabled': habilitado }"
+                            >
+                              <ng-template pTemplate="selectedItem">
+                                <div *ngIf="categoriaIdadeSelecionada">
+                                  <div>
+                                    {{ categoriaIdadeSelecionada.name }}
+                                  </div>
+                                </div>
+                              </ng-template>
+                              <ng-template let-categoriaIdade pTemplate="item">
+                                <div class="categoriaIdade-item">
+                                  <div>{{ categoriaIdade.name }}</div>
+                                </div>
+                              </ng-template>
+                            </p-dropdown>
+                            <label>Categoria de Idade</label>
+                          </span>
+                        </div>
+
+                        <!-- Cálculo Automático -->
+                        <!-- <div
+                        class="col"
+                        style="margin-top: -1.8em; text-align: center"
+                      >
+                        <small label for="calculoAutomatico" class="block">
+                          Cálculo Automático</small
+                        >
+                        <p-checkbox
+                          [(ngModel)]="calculoAutomatico"
+                          [binary]="true"
+                          inputId="calculoAutomatico"
+                        ></p-checkbox>
+                      </div> -->
+                      </div>
+
+                      <div class="grid divHorizontal">
+                        <!-- Data de Julgamento -->
+                        <div class="col-3" [hidden]="mostraTelaResumida">
+                          <span
+                            class="p-float-label"
+                            [ngClass]="{ disabledStyle: habilitado }"
+                          >
+                            <p-calendar
+                              [(ngModel)]="dataJulg"
+                              [showIcon]="true"
+                              [style]="{ width: '100%' }"
+                              [ngClass]="{ 'p-disabled': habilitado }"
+                            ></p-calendar>
+                            <label class="ajusteLabel"
+                              >Data de Julgamento</label
+                            >
+                          </span>
+                        </div>
+
+                        <!-- Data Julgamento Extensa -->
+                        <div class="col-3 ajusteTexto" [hidden]="mostraTelaResumida">
+                          <h6 class="textoDestaque">
+                            {{ dataJulgamentoExtensa }}
+                          </h6>
+                        </div>
+
+                        <!-- Sisbov -->
+                        <div class="col-6" [hidden]="mostraTelaResumida">
+                          <span
+                            class="p-float-label"
+                            [ngClass]="{ disabledStyle: habilitado }"
+                          >
+                            <input
+                              type="text"
+                              pInputText
+                              class="p-inputtext-sm"
+                              value="{{ sisbov }}"
+                              [style]="{ width: '100%' }"
+                              [ngClass]="{ 'p-disabled': habilitado }"
+                            />
+                            <label>Sisbov</label>
+                          </span>
+                        </div>
+                      </div>
+
+                      <!-- Situações -->
+                      <div class="grid">
+                        Situações:
+                        <h5 class="textoDestaque" style="margin: 0.4em">
+                          {{ situacoes }}
+                        </h5>
+                      </div>
+                    </p-fieldset>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Coluna da Direita -->
+          <div class="ajusteAlturaDiv col-12 sm:col-10 md:col-4 lg:col-2">
+            <!-- PMGZ Comercial -->
+            <p-fieldset legend="PMGZ Comercial">
+              <div class="grid">
+                <div class="col">
+                  <!-- Comercial -->
+                  <div class="col comercialPMGZC">
+                    <span
+                      class="p-float-label"
+                      [ngClass]="{ disabledStyle: true }"
+                    >
+                      <div class="p-inputgroup">
+                        <button
+                          type="button"
+                          pButton
+                          pRipple
+                          icon="pi pi-check"
+                          styleClass="p-button-success"
+                          pTooltip="Confirmar Comercial"
+                          tooltipPosition="bottom"
+                        ></button>
+                        <input
+                          type="text"
+                          pInputText
+                          inputId="comercialPMGZC"
+                          value="{{ comercialPMGZC }}"
+                          [ngClass]="{ 'p-disabled': true }"
+                        />
+                        <button
+                          type="button"
+                          pButton
+                          pRipple
+                          icon="pi pi-times"
+                          styleClass="p-button-danger"
+                          pTooltip="Remover Comercial"
+                          tooltipPosition="bottom"
+                        ></button>
+                        <label>Comercial</label>
+                      </div>
+                    </span>
+                  </div>
+                </div>
+                <div class="col">
+                  <!-- Classificação -->
+                  <div class="col">
+                    <span
+                      class="p-float-label"
+                      style="margin-left: -1em"
+                      [ngClass]="{ disabledStyle: habilitado }"
+                    >
+                      <p-dropdown
+                        inputId="classificacaoPMGZC"
+                        [autoDisplayFirst]="false"
+                        [options]="classificacoesPMGZC"
+                        [(ngModel)]="classificacaoPMGZCSelecionado"
+                        optionLabel="name"
+                        [style]="{ width: '100%' }"
+                        [ngClass]="{ 'p-disabled': habilitado }"
+                      ></p-dropdown>
+                      <label>Classificação</label>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </p-fieldset>
+
+            <p-fieldset>
+              <div class="col">
+                <!-- Status -->
+                <div class="col">
+                  <span
+                    class="p-float-label"
+                    [ngClass]="{ disabledStyle: true }"
+                  >
+                    <div class="p-inputgroup">
+                      <button
+                        type="button"
+                        pButton
+                        pRipple
+                        icon="pi pi-check"
+                        styleClass="p-button-success"
+                        pTooltip="Ativar"
+                        tooltipPosition="bottom"
+                      ></button>
+                      <input
+                        type="text"
+                        pInputText
+                        inputId="status"
+                        value="{{ statusSelecionado.name }}"
+                        [ngClass]="{ 'p-disabled': true }"
+                      />
+                      <button
+                        type="button"
+                        pButton
+                        pRipple
+                        icon="pi pi-times"
+                        styleClass="p-button-danger"
+                        pTooltip="Descartar"
+                        tooltipPosition="bottom"
+                      ></button>
+                      <label>Status</label>
+                    </div>
+                  </span>
+                </div>
+
+                <!-- Paginação -->
+                <p-paginator [rows]="1"></p-paginator>
+              </div>
+            </p-fieldset>
+
+            <p-fieldset>
+              <div class="col">
+                <!-- Situação Reprodutiva -->
+                <div class="col">
+                  <span
+                    class="p-float-label"
+                    [ngClass]="{ disabledStyle: true }"
+                  >
+                    <input
+                      type="text"
+                      pInputText
+                      class="p-inputtext-sm"
+                      value="{{ situacaoReprodutivaDoAnimal.name }}"
+                      [style]="{ width: '100%' }"
+                      [ngClass]="{ 'p-disabled': true }"
+                    />
+                    <label>Situação Reprodutiva</label>
+                  </span>
+                </div>
+              </div>
+            </p-fieldset>
+
+            <p-fieldset [hidden]="mostraTelaResumida">
+              <div>
+                <!-- Grupo de Manejo -->
+                <div class="col">
+                  <span
+                    class="p-float-label"
+                    [ngClass]="{ disabledStyle: true }"
+                  >
+                    <input
+                      type="text"
+                      pInputText
+                      class="p-inputtext-sm"
+                      value="{{ grupoManejo }}"
+                      [style]="{ width: '100%' }"
+                      [ngClass]="{ 'p-disabled': true }"
+                    />
+                    <label>Grupo de Manejo</label>
+                  </span>
+                </div>
+
+                <div class="grid divHorizontal">
+                  <div class="col-6">
+                    <!-- CDC de origem -->
+                    <div class="col">
+                      <span
+                        class="p-float-label"
+                        [ngClass]="{ disabledStyle: true }"
+                      >
+                        <input
+                          type="text"
+                          pInputText
+                          class="p-inputtext-sm"
+                          value="{{ cdcOrigem }}"
+                          [style]="{ width: '100%' }"
+                          [ngClass]="{ 'p-disabled': true }"
+                        />
+                        <label>CDC de Origem</label>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <!-- CDN de origem -->
+                    <div class="col">
+                      <span
+                        class="p-float-label"
+                        [ngClass]="{ disabledStyle: true }"
+                      >
+                        <input
+                          type="text"
+                          pInputText
+                          class="p-inputtext-sm"
+                          value="{{ cdnOrigem }}"
+                          [style]="{ width: '100%' }"
+                          [ngClass]="{ 'p-disabled': true }"
+                        />
+                        <label>CDN de Origem</label>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="divHorizontal">
+                  <!-- EPMURAS -->
+                  <div class="col">
+                    <span
+                      class="p-float-label"
+                      [ngClass]="{ disabledStyle: true }"
+                    >
+                      <input
+                        type="text"
+                        pInputText
+                        class="p-inputtext-sm"
+                        value="{{ epmurasSelecionado }}"
+                        [style]="{ width: '100%' }"
+                        [ngClass]="{ 'p-disabled': true }"
+                      />
+                      <label>EPMURAS</label>
+                    </span>
+                  </div>
+                </div>
+
+                <div class="grid">
+                  <!-- CDN A CORRIGIR -->
+                  <div class="col-5">
+                    <small label for="cdnCorrigir" class="block">
+                      CDN A CORRIGIR</small
+                    >
+                    <p-checkbox
+                      [(ngModel)]="cdnCorrigir"
+                      [binary]="true"
+                      inputId="cdnCorrigir"
+                    ></p-checkbox>
+                  </div>
+
+                  <!-- MARCADO P/ IMRPIMIR -->
+                  <div class="col">
+                    <small label for="marcadoImprimir" class="block">
+                      MARCADO P/ IMPRIMIR</small
+                    >
+                    <p-checkbox
+                      [(ngModel)]="marcadoImprimir"
+                      [binary]="true"
+                      inputId="marcadoImprimir"
+                    ></p-checkbox>
+                  </div>
+                </div>
+              </div>
+            </p-fieldset>
+          </div>
+        </div>
+
+        <!-- Pai/Mãe -->
+        <div class="ajusteAlturaDiv col-7">
+          <div class="grid">
+            <!-- Pai -->
+            <div class="col" [hidden]="mostraTelaResumida">
+              <p-fieldset legend="Pai">
+                <div class="grid">
+                  <div class="col-6" style="padding-bottom: 1em">
+                    <!-- Raca Pai -->
+                    <div class="col">
+                      <span
+                        class="p-float-label"
+                        [ngClass]="{ disabledStyle: habilitado }"
+                      >
+                        <p-dropdown
+                          [options]="racas"
+                          [(ngModel)]="racaSelecionadaPai"
+                          optionLabel="nomeFiltro"
+                          [filter]="true"
+                          filterBy="nomeFiltro"
+                          [showClear]="true"
+                          placeholder="Raça"
+                          inputId="raca"
+                          [style]="{ width: '100%' }"
+                          [ngClass]="{ 'p-disabled': habilitado }"
+                          [resetFilterOnHide]="true"
+                        >
+                          <ng-template pTemplate="selectedItem">
+                            <div *ngIf="racaSelecionadaPai">
+                              <div>
+                                {{ racaSelecionadaPai.nomeFiltro }}
+                              </div>
+                            </div>
+                          </ng-template>
+                          <ng-template let-raca pTemplate="item">
+                            <div class="raca-item">
+                              <div>{{ raca.nomeFiltro }}</div>
+                            </div>
+                          </ng-template>
+                        </p-dropdown>
+                        <label>Raça (*)</label>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-6">
+                    <!-- Categoria Pai -->
+                    <div class="col">
+                      <span
+                        class="p-float-label"
+                        [ngClass]="{ disabledStyle: habilitado }"
+                      >
+                        <p-dropdown
+                          [options]="categorias"
+                          [(ngModel)]="categoriaSelecionadaPai"
+                          optionLabel="nomeFiltro"
+                          [filter]="true"
+                          filterBy="nomeFiltro"
+                          [showClear]="true"
+                          placeholder="Categoria"
+                          inputId="categoria"
+                          [style]="{ width: '100%' }"
+                          [ngClass]="{ 'p-disabled': habilitado }"
+                          [resetFilterOnHide]="true"
+                        >
+                          <ng-template pTemplate="selectedItem">
+                            <div *ngIf="categoriaSelecionadaPai">
+                              <div>
+                                {{ categoriaSelecionadaPai.nomeFiltro }}
+                              </div>
+                            </div>
+                          </ng-template>
+                          <ng-template let-categoria pTemplate="item">
+                            <div class="categoria-item">
+                              <div>{{ categoria.nomeFiltro }}</div>
+                            </div>
+                          </ng-template>
+                        </p-dropdown>
+                        <label>Categoria (*)</label>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="grid">
+                  <div class="col-4">
+                    <!-- Serie Pai-->
+                    <div class="col">
+                      <span
+                        class="p-float-label"
+                        [ngClass]="{ disabledStyle: habilitado }"
+                      >
+                        <input
+                          type="text"
+                          pInputText
+                          class="p-inputtext-sm"
+                          value="{{ seriePai }}"
+                          [style]="{ width: '100%' }"
+                          [ngClass]="{ 'p-disabled': habilitado }"
+                        />
+                        <label>Série</label>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-4">
+                    <!-- RGN Pai -->
+                    <div class="col">
+                      <span
+                        class="p-float-label"
+                        [ngClass]="{ disabledStyle: habilitado }"
+                      >
+                        <input
+                          type="text"
+                          pInputText
+                          class="p-inputtext-sm"
+                          value="{{ rgnPai }}"
+                          [style]="{ width: '100%' }"
+                          [ngClass]="{ 'p-disabled': habilitado }"
+                        />
+                        <label>RGN</label>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-4">
+                    <!-- RGD Pai -->
+                    <div class="col">
+                      <span
+                        class="p-float-label"
+                        [ngClass]="{ disabledStyle: habilitado }"
+                      >
+                        <input
+                          type="text"
+                          pInputText
+                          class="p-inputtext-sm"
+                          value="{{ rgdPai }}"
+                          [style]="{ width: '100%' }"
+                          [ngClass]="{ 'p-disabled': habilitado }"
+                        />
+                        <label>RGD</label>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Nome do Pai -->
+                <div class="grid">
+                  <h5
+                    class="textoDestaque"
+                    style="margin: 0.4em; margin-left: 1.2em"
+                  >
+                    {{ nomePai }}
+                  </h5>
+                </div>
+              </p-fieldset>
+            </div>
+
+            <!-- Mãe -->
+            <div class="col" [hidden]="mostraTelaResumida">
+              <p-fieldset legend="Mãe">
+                <div class="grid">
+                  <div class="col-6" style="padding-bottom: 1em">
+                    <!-- Raca Mae -->
+                    <div class="col">
+                      <span
+                        class="p-float-label"
+                        [ngClass]="{ disabledStyle: habilitado }"
+                      >
+                        <p-dropdown
+                          [options]="racas"
+                          [(ngModel)]="racaSelecionadaMae"
+                          optionLabel="nomeFiltro"
+                          [filter]="true"
+                          filterBy="nomeFiltro"
+                          [showClear]="true"
+                          placeholder="Raça"
+                          inputId="raca"
+                          [style]="{ width: '100%' }"
+                          [ngClass]="{ 'p-disabled': habilitado }"
+                          [resetFilterOnHide]="true"
+                        >
+                          <ng-template pTemplate="selectedItem">
+                            <div *ngIf="racaSelecionadaMae">
+                              <div>
+                                {{ racaSelecionadaMae.nomeFiltro }}
+                              </div>
+                            </div>
+                          </ng-template>
+                          <ng-template let-raca pTemplate="item">
+                            <div class="raca-item">
+                              <div>{{ raca.nomeFiltro }}</div>
+                            </div>
+                          </ng-template>
+                        </p-dropdown>
+                        <label>Raça (*)</label>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-6">
+                    <!-- Categoria Mae -->
+                    <div class="col">
+                      <span
+                        class="p-float-label"
+                        [ngClass]="{ disabledStyle: habilitado }"
+                      >
+                        <p-dropdown
+                          [options]="categorias"
+                          [(ngModel)]="categoriaSelecionadaMae"
+                          optionLabel="nomeFiltro"
+                          [filter]="true"
+                          filterBy="nomeFiltro"
+                          [showClear]="true"
+                          placeholder="Categoria"
+                          inputId="categoria"
+                          [style]="{ width: '100%' }"
+                          [ngClass]="{ 'p-disabled': habilitado }"
+                          [resetFilterOnHide]="true"
+                        >
+                          <ng-template pTemplate="selectedItem">
+                            <div *ngIf="categoriaSelecionadaMae">
+                              <div>
+                                {{ categoriaSelecionadaMae.nomeFiltro }}
+                              </div>
+                            </div>
+                          </ng-template>
+                          <ng-template let-categoria pTemplate="item">
+                            <div class="categoria-item">
+                              <div>{{ categoria.nomeFiltro }}</div>
+                            </div>
+                          </ng-template>
+                        </p-dropdown>
+                        <label>Categoria (*)</label>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="grid">
+                  <div class="col-4">
+                    <!-- Serie Mae-->
+                    <div class="col">
+                      <span
+                        class="p-float-label"
+                        [ngClass]="{ disabledStyle: habilitado }"
+                      >
+                        <input
+                          type="text"
+                          pInputText
+                          class="p-inputtext-sm"
+                          value="{{ serieMae }}"
+                          [style]="{ width: '100%' }"
+                          [ngClass]="{ 'p-disabled': habilitado }"
+                        />
+                        <label>Série</label>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-4">
+                    <!-- RGN Mae -->
+                    <div class="col">
+                      <span
+                        class="p-float-label"
+                        [ngClass]="{ disabledStyle: habilitado }"
+                      >
+                        <input
+                          type="text"
+                          pInputText
+                          class="p-inputtext-sm"
+                          value="{{ rgnMae }}"
+                          [style]="{ width: '100%' }"
+                          [ngClass]="{ 'p-disabled': habilitado }"
+                        />
+                        <label>RGN</label>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-4">
+                    <!-- RGD Mae -->
+                    <div class="col">
+                      <span
+                        class="p-float-label"
+                        [ngClass]="{ disabledStyle: habilitado }"
+                      >
+                        <input
+                          type="text"
+                          pInputText
+                          class="p-inputtext-sm"
+                          value="{{ rgdMae }}"
+                          [style]="{ width: '100%' }"
+                          [ngClass]="{ 'p-disabled': habilitado }"
+                        />
+                        <label>RGD</label>
+                      </span>
+                    </div>
+                  </div>
+
+                  <!-- Nome da Mae -->
+                  <div class="grid">
+                    <h5
+                      class="textoDestaque"
+                      style="margin: 0.4em; margin-left: 2em"
+                    >
+                      {{ nomeMae }}
+                    </h5>
+                  </div>
+                </div>
+              </p-fieldset>
+            </div>
+          </div>
+
+          <div class="col" [hidden]="mostraTelaResumida">
+            <!-- Informações Adicionais -->
+            <p-fieldset
+              legend="Informações Adicionais"
+              [toggleable]="true"
+              [collapsed]="true"
+            >
+              <div class="grid">
+                <!-- Origem -->
+                <div class="col">
+                  <span
+                    class="p-float-label"
+                    [ngClass]="{ disabledStyle: habilitado }"
+                  >
+                    <p-dropdown
+                      [options]="origens"
+                      [(ngModel)]="origemSelecionada"
+                      optionLabel="name"
+                      [showClear]="true"
+                      placeholder="Origem"
+                      inputId="origem"
+                      [style]="{ width: '100%' }"
+                      [ngClass]="{ 'p-disabled': habilitado }"
+                    >
+                      <ng-template pTemplate="selectedItem">
+                        <div *ngIf="origemSelecionada">
+                          <div>
+                            {{ origemSelecionada.name }}
+                          </div>
+                        </div>
+                      </ng-template>
+                      <ng-template let-origem pTemplate="item">
+                        <div class="origem-item">
+                          <div>{{ origem.name }}</div>
+                        </div>
+                      </ng-template>
+                    </p-dropdown>
+                    <label>Origem</label>
+                  </span>
+                </div>
+
+                <!-- Ocorrência Reprodutiva -->
+                <div class="col">
+                  <span
+                    class="p-float-label"
+                    [ngClass]="{ disabledStyle: habilitado }"
+                  >
+                    <p-dropdown
+                      [options]="ocorrenciasReprod"
+                      [(ngModel)]="ocorrenciaReprodSelecionada"
+                      optionLabel="name"
+                      [showClear]="true"
+                      placeholder="Ocorrência Reprodutiva"
+                      inputId="pelagem"
+                      [style]="{ width: '100%' }"
+                      [ngClass]="{ 'p-disabled': habilitado }"
+                    >
+                      <ng-template pTemplate="selectedItem">
+                        <div *ngIf="ocorrenciaReprodSelecionada">
+                          <div>
+                            {{ ocorrenciaReprodSelecionada.name }}
+                          </div>
+                        </div>
+                      </ng-template>
+                      <ng-template let-ocorrenciaReprod pTemplate="item">
+                        <div class="ocorrenciaReprod-item">
+                          <div>{{ ocorrenciaReprod.name }}</div>
+                        </div>
+                      </ng-template>
+                    </p-dropdown>
+                    <label>Ocorrência Reprodutiva</label>
+                  </span>
+                </div>
+
+                <!-- Minha Classificação -->
+                <div class="col">
+                  <span
+                    class="p-float-label"
+                    [ngClass]="{ disabledStyle: habilitado }"
+                  >
+                    <p-dropdown
+                      [options]="minhasClassificacoes"
+                      [(ngModel)]="minhaClassificacaoSelecionada"
+                      optionLabel="name"
+                      placeholder="Minha Classificação"
+                      inputId="minhaClassificacao"
+                      [style]="{ width: '100%' }"
+                      [ngClass]="{ 'p-disabled': habilitado }"
+                    >
+                      <ng-template pTemplate="selectedItem">
+                        <div *ngIf="minhaClassificacaoSelecionada">
+                          <div>
+                            {{ minhaClassificacaoSelecionada.name }}
+                          </div>
+                        </div>
+                      </ng-template>
+                      <ng-template let-minhaClassificacao pTemplate="item">
+                        <div class="minhaClassificacao-item">
+                          <div>{{ minhaClassificacao.name }}</div>
+                        </div>
+                      </ng-template>
+                    </p-dropdown>
+                    <label>Minha Classificação</label>
+                  </span>
+                </div>
+              </div>
+
+              <div class="grid divHorizontal">
+                <!-- Receptora -->
+                <div class="col-2">
+                  <span
+                    class="p-float-label"
+                    [ngClass]="{ disabledStyle: true }"
+                  >
+                    <input
+                      type="text"
+                      pInputText
+                      class="p-inputtext-sm"
+                      value="{{ receptora }}"
+                      [style]="{ width: '100%' }"
+                      [ngClass]="{ 'p-disabled': true }"
+                    />
+                    <label>Receptora</label>
+                  </span>
+                </div>
+
+                <!-- Tipagem -->
+                <div class="col">
+                  <span
+                    class="p-float-label"
+                    [ngClass]="{ disabledStyle: habilitado }"
+                  >
+                    <p-dropdown
+                      [options]="tipagens"
+                      [(ngModel)]="tipagemSelecionada"
+                      optionLabel="name"
+                      placeholder="Tipagem"
+                      inputId="tipagem"
+                      [style]="{ width: '100%' }"
+                      [ngClass]="{ 'p-disabled': habilitado }"
+                    >
+                      <ng-template pTemplate="selectedItem">
+                        <div *ngIf="tipagemSelecionada">
+                          <div>
+                            {{ tipagemSelecionada.name }}
+                          </div>
+                        </div>
+                      </ng-template>
+                      <ng-template let-tipagem pTemplate="item">
+                        <div class="tipagem-item">
+                          <div>{{ tipagem.name }}</div>
+                        </div>
+                      </ng-template>
+                    </p-dropdown>
+                    <label>Tipagem</label>
+                  </span>
+                </div>
+
+                <!-- Ponderal -->
+                <div class="col">
+                  <span
+                    class="p-float-label"
+                    [ngClass]="{ disabledStyle: habilitado }"
+                  >
+                    <p-dropdown
+                      [options]="ponderais"
+                      [(ngModel)]="ponderalSelecionado"
+                      optionLabel="name"
+                      placeholder="Ponderal"
+                      inputId="ponderal"
+                      [style]="{ width: '100%' }"
+                      [ngClass]="{ 'p-disabled': habilitado }"
+                    >
+                      <ng-template pTemplate="selectedItem">
+                        <div *ngIf="ponderalSelecionado">
+                          <div>
+                            {{ ponderalSelecionado.name }}
+                          </div>
+                        </div>
+                      </ng-template>
+                      <ng-template let-ponderal pTemplate="item">
+                        <div class="ponderal-item">
+                          <div>{{ ponderal.name }}</div>
+                        </div>
+                      </ng-template>
+                    </p-dropdown>
+                    <label>Ponderal (*)</label>
+                  </span>
+                </div>
+
+                <!-- Tipo Parto -->
+                <div class="col">
+                  <span
+                    class="p-float-label"
+                    [ngClass]="{ disabledStyle: habilitado }"
+                  >
+                    <p-dropdown
+                      [options]="tiposParto"
+                      [(ngModel)]="tipoPartoSelecionado"
+                      optionLabel="name"
+                      placeholder="Tipo Parto"
+                      inputId="tipoParto"
+                      [style]="{ width: '100%' }"
+                      [ngClass]="{ 'p-disabled': habilitado }"
+                    >
+                      <ng-template pTemplate="selectedItem">
+                        <div *ngIf="tipoPartoSelecionado">
+                          <div>
+                            {{ tipoPartoSelecionado.name }}
+                          </div>
+                        </div>
+                      </ng-template>
+                      <ng-template let-tipoParto pTemplate="item">
+                        <div class="tipoParto-item">
+                          <div>{{ tipoParto.name }}</div>
+                        </div>
+                      </ng-template>
+                    </p-dropdown>
+                    <label>Tipo Parto</label>
+                  </span>
+                </div>
+
+                <!-- Possui DNA -->
+                <div class="col">
+                  <span
+                    class="p-float-label"
+                    [ngClass]="{ disabledStyle: habilitado }"
+                  >
+                    <p-dropdown
+                      [options]="possuiDNAs"
+                      [(ngModel)]="possuiDNASelecionado"
+                      optionLabel="name"
+                      placeholder="Possui DNA"
+                      inputId="possuiDNA"
+                      [style]="{ width: '100%' }"
+                      [ngClass]="{ 'p-disabled': habilitado }"
+                    >
+                      <ng-template pTemplate="selectedItem">
+                        <div *ngIf="possuiDNASelecionado">
+                          <div>
+                            {{ possuiDNASelecionado.name }}
+                          </div>
+                        </div>
+                      </ng-template>
+                      <ng-template let-possuiDNA pTemplate="item">
+                        <div class="possuiDNA-item">
+                          <div>{{ possuiDNA.name }}</div>
+                        </div>
+                      </ng-template>
+                    </p-dropdown>
+                    <label>Possui DNA</label>
+                  </span>
+                </div>
+              </div>
+            </p-fieldset>
+          </div>
+
+          <!-- Genealogia -->
+          <div class="col" [hidden]="mostraTelaResumida">
+            <p-fieldset
+              legend="Genealogia"
+              [toggleable]="true"
+              [collapsed]="true"
+            >
+              <p-organizationChart
+                [value]="dataGenealogia"
+              ></p-organizationChart>
+            </p-fieldset>
+          </div>
+        </div>
+      </div>
+    </div>
+  </p-tabPanel>
+
+  <!-- LISTA DE ANIMAIS -->
+  <p-tabPanel header="Lista de Animais">
+    <p-table
+      [value]="produtos"
+      selectionMode="single"
+      [(selection)]="produtoSelecionado"
+      dataKey="produto"
+      (onRowSelect)="onRowSelect()"
+      [paginator]="true"
+      [rows]="registrosPorPagina"
+    >
+      <ng-template pTemplate="caption">
+        <!-- <button pButton pRipple label="Exportar XLS" icon="pi pi-file-excel" (click)="exportExcel()"></button> -->
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 10%">Raça</th>
+          <th style="width: 10%">Categoria de Registro</th>
+          <th style="width: 5%">Sexo</th>
+          <th style="width: 5%">Série</th>
+          <th style="width: 5%">RGN</th>
+          <th style="width: 5%">RGD</th>
+          <th style="width: 25%">Nome</th>
+          <th style="width: 10%">Nascimento</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-produto>
+        <tr [pSelectableRow]="produtoSelecionado">
+          <td>{{ produto.raca.nome }}</td>
+          <td>{{ produto.categoria.name }}</td>
+          <td>{{ produto.sexo }}</td>
+          <td>{{ produto.serie }}</td>
+          <td>{{ produto.rgn }}</td>
+          <td>{{ produto.rgd }}</td>
+          <td>{{ produto.nomeProduto?.nome }}</td>
+          <td>{{ produto.dataNasc }}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+        <div>Registros: {{ produtos ? produtos.length : 0 }}</div>
+      </ng-template>
+    </p-table>
+  </p-tabPanel>
+</p-tabView>

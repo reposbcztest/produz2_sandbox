@@ -1,0 +1,239 @@
+<div class="background">
+  <div class="grid">
+    <!-- 1º nível -->
+    <div class="col-fixed col-offset-1" style="height: 430px;">
+      <div class="grid" style="height: 185px"></div>
+
+      <!-- Animal -->
+      <div class="col" style="text-align: center">
+        <input
+          type="button"
+          pInputText
+          class="p-inputtext-sm"
+          value="Teste"
+          [style]="{ width: '200px' }"
+          (click)="showModal('1')"
+        />
+      </div>
+    </div>
+
+    <!-- 2º nível -->
+    <div class="col-fixed">
+      <!-- Pai -->
+      <div class="grid" style="height: 90px"></div>
+      <div class="col" style="text-align: center">
+        <span class="p-float-label" [ngClass]="{ disabledStyle: true }">
+          <input
+            type="button"
+            pInputText
+            class="p-inputtext-sm"
+            value="Teste"
+            [style]="{ width: '200px' }"
+            (click)="showModal('2')"
+          />
+        </span>
+      </div>
+
+      <!-- Mãe -->
+      <div class="grid" style="height: 157px"></div>
+      <div class="col" style="text-align: center">
+        <span class="p-float-label" [ngClass]="{ disabledStyle: true }">
+          <input
+            type="button"
+            pInputText
+            class="p-inputtext-sm"
+            value="Teste"
+            [style]="{ width: '200px' }"
+            (click)="showModal('3')"
+          />
+        </span>
+      </div>
+    </div>
+
+    <!-- 3º nível -->
+    <div class="col-fixed">
+      <!-- AvôP -->
+      <div class="grid" style="height: 55px"></div>
+      <div class="grid" style="text-align: center">
+        <span class="p-float-label" [ngClass]="{ disabledStyle: true }">
+          <input
+            type="button"
+            pInputText
+            class="p-inputtext-sm"
+            value="Teste"
+            [style]="{ width: '200px' }"
+            (click)="showModal('4')"
+          />
+        </span>
+      </div>
+
+      <!-- AvóP -->
+      <div class="grid" style="height: 85px"></div>
+      <div class="grid" style="text-align: center">
+        <span class="p-float-label" [ngClass]="{ disabledStyle: true }">
+          <input
+            type="button"
+            pInputText
+            class="p-inputtext-sm"
+            value="Teste"
+            [style]="{ width: '200px' }"
+            (click)="showModal('5')"
+          />
+        </span>
+      </div>
+
+      <!-- AvôM -->
+      <div class="grid" style="height: 82px"></div>
+      <div class="grid" style="text-align: center">
+        <span class="p-float-label" [ngClass]="{ disabledStyle: true }">
+          <input
+            type="button"
+            pInputText
+            class="p-inputtext-sm"
+            value="Teste"
+            [style]="{ width: '200px' }"
+            (click)="showModal('6')"
+          />
+        </span>
+      </div>
+
+      <!-- AvóM -->
+      <div class="grid" style="height: 83px"></div>
+      <div class="grid" style="text-align: center">
+        <span class="p-float-label" [ngClass]="{ disabledStyle: true }">
+          <input
+            type="button"
+            pInputText
+            class="p-inputtext-sm"
+            value="Teste"
+            [style]="{ width: '200px' }"
+            (click)="showModal('7')"
+          />
+        </span>
+      </div>
+    </div>
+
+    <!-- 4º nível -->
+    <div class="col-fixed" style="margin-left: 30px">
+      <div class="grid" style="height: 28px"></div>
+      <!-- PaiAvôP -->
+      <div class="grid" style="text-align: center">
+        <span class="p-float-label" [ngClass]="{ disabledStyle: true }">
+          <input
+            type="button"
+            pInputText
+            class="p-inputtext-sm"
+            value="Teste"
+            [style]="{ width: '200px' }"
+            (click)="showModal('8')"
+          />
+        </span>
+      </div>
+
+      <div class="grid" style="height: 31px"></div>
+      <!-- MãeAvôP -->
+      <div class="grid" style="text-align: center">
+        <span class="p-float-label" [ngClass]="{ disabledStyle: true }">
+          <input
+            type="button"
+            pInputText
+            class="p-inputtext-sm"
+            value="Teste"
+            [style]="{ width: '200px' }"
+            (click)="showModal('9')"
+          />
+        </span>
+      </div>
+
+      <div class="grid" style="height: 34px"></div>
+      <!-- PaiAvôM -->
+      <div class="grid" style="text-align: center">
+        <span class="p-float-label" [ngClass]="{ disabledStyle: true }">
+          <input
+            type="button"
+            pInputText
+            class="p-inputtext-sm"
+            value="Teste"
+            [style]="{ width: '200px' }"
+            (click)="showModal('10')"
+          />
+        </span>
+      </div>
+
+      <div class="grid" style="height: 35px"></div>
+      <!-- MãeAvôM -->
+      <div class="grid" style="text-align: center">
+        <span class="p-float-label" [ngClass]="{ disabledStyle: true }">
+          <input
+            type="button"
+            pInputText
+            class="p-inputtext-sm"
+            value="Teste"
+            [style]="{ width: '200px' }"
+            (click)="showModal('11')"
+          />
+        </span>
+      </div>
+
+      <div class="grid" style="height: 31px"></div>
+      <!-- PaiAvóP -->
+      <div class="grid" style="text-align: center">
+        <span class="p-float-label" [ngClass]="{ disabledStyle: true }">
+          <input
+            type="button"
+            pInputText
+            class="p-inputtext-sm"
+            value="Teste"
+            [style]="{ width: '200px' }"
+            (click)="showModal('12')"
+          />
+        </span>
+      </div>
+
+      <div class="grid" style="height: 33px"></div>
+      <!-- MãeAvóP -->
+      <div class="grid" style="text-align: center">
+        <span class="p-float-label" [ngClass]="{ disabledStyle: true }">
+          <input
+            type="button"
+            pInputText
+            class="p-inputtext-sm"
+            value="Teste"
+            [style]="{ width: '200px' }"
+            (click)="showModal('13')"
+          />
+        </span>
+      </div>
+
+      <div class="grid" style="height: 38px"></div>
+      <!-- PaiAvóM -->
+      <div class="grid" style="text-align: center">
+        <span class="p-float-label" [ngClass]="{ disabledStyle: true }">
+          <input
+            type="button"
+            pInputText
+            class="p-inputtext-sm"
+            value="Teste"
+            [style]="{ width: '200px' }"
+            (click)="showModal('14')"
+          />
+        </span>
+      </div>
+
+      <div class="grid" style="height: 31px"></div>
+      <!-- MãeAvóM -->
+      <div class="grid" style="text-align: center">
+        <span class="p-float-label" [ngClass]="{ disabledStyle: true }">
+          <input
+            type="button"
+            pInputText
+            class="p-inputtext-sm"
+            value="Teste"
+            [style]="{ width: '200px' }"
+            (click)="showModal('15')"
+          />
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

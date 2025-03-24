@@ -1,0 +1,41 @@
+.titleRelatorio {
+  font-family: arial;
+  font-weight: 600;
+  color: darkslategray;
+  animation: scalein 0.5s ease-in-out;
+
+    @keyframes scalein {
+        0% {
+            opacity: 0;
+            transform: scaleY(0.8);
+            transition: transform .12s cubic-bezier(0, 0, 0.2, 1), opacity .12s cubic-bezier(0, 0, 0.2, 1);
+        }
+        100% {
+            opacity: 1;
+            transform: scaleY(1);
+        }
+    }
+}
+
+.divRelatorio {
+  display: inline-block;
+  padding-left: 10px;
+}
+
+.buttonRelatorio {
+  margin: 5px;
+  color: darkorange !important;
+  animation: scalein 1s ease-in-out;
+
+    @keyframes scalein {
+        0% {
+            opacity: 0;
+            transform: scaleY(0.8);
+            transition: transform .12s cubic-bezier(0, 0, 0.2, 1), opacity .12s cubic-bezier(0, 0, 0.2, 1);
+        }
+        100% {
+            opacity: 1;
+            transform: scaleY(1);
+        }
+    }
+}

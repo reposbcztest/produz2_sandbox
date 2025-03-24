@@ -1,0 +1,150 @@
+<p-tabView>
+  <p-overlayPanel #ajuda> Conteúdo de teste </p-overlayPanel>
+
+  <div class="divHelp">
+    <!-- <i class="pi pi-info-circle iconHelp" (click)="ajuda.toggle($event)"></i> -->
+    <p-button
+      id ='btnAjuda'
+      class="iconHelp"
+      icon="pi pi-info-circle"
+      styleClass="p-button-text"
+      (onHover)="ajuda.toggle($event)"
+    ></p-button>
+  </div>
+
+  <!-- 1ª Aba -->
+  <p-tabPanel header="Documentos Abertos">
+    <div class="grid pt-2">
+      <div class="col-fixed" style="width: 150px">
+        <!-- Todos -->
+        <div class="col flex gap-1">
+          <p-radioButton
+            name="group1"
+            value="td"
+            [(ngModel)]="opcoesAba1"
+            inputId="td"
+            (onClick)="selecionaFiltro()"
+          ></p-radioButton>
+          <label for="td">Todos</label>
+        </div>
+
+        <!-- Coberturas e Nascimentos -->
+        <div class="col flex gap-1">
+          <p-radioButton
+            name="group1"
+            value="cn"
+            [(ngModel)]="opcoesAba1"
+            inputId="cn"
+            (onClick)="selecionaFiltro()"
+          ></p-radioButton>
+          <label for="cn">Coberturas e Nascimentos(Geram multas)</label>
+        </div>
+
+        <!-- Demais Documentos -->
+        <div class="col flex gap-1">
+          <p-radioButton
+            name="group1"
+            value="dd"
+            [(ngModel)]="opcoesAba1"
+            inputId="dd "
+            (onClick)="selecionaFiltro()"
+          ></p-radioButton>
+          <label for="dd">Demais Documentos(Não geram multas)</label>
+        </div>
+      </div>
+
+      <p-divider class="p-2" layout="vertical"></p-divider>
+
+      <div class="col-9 divDadosAnimal">
+        <p-table
+          id="tbDocs"
+          [value]="documentosAbertos"
+          [style]="{ width: '110%', height: '390px' }"
+          [styleClass]="'p-datatable-sm'"
+          [paginator]="true"
+          [rows]="8"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="codCriador" style="width: 6%">Criador</th>
+              <th pSortableColumn="nomCriador" style="width: 20%">
+                Nome Criador
+              </th>
+              <th pSortableColumn="nomFazenda" style="width: 20%">
+                Nome Fazenda
+              </th>
+              <th pSortableColumn="nomDocumento" style="width: 22%">
+                Documento
+              </th>
+              <th pSortableColumn="mes" style="width: 5%">Mês</th>
+              <th png serSortableColumn="ano" style="width: 5%">Ano</th>
+              <th pSortableColumn="numero" style="width: 10%">Número</th>
+              <th pSortableColumn="raca" style="width: 7%">Raça</th>
+              <th pSortableColumn="categoria" style="width: 10%">Categoria</th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-documento>
+            <tr>
+              <td>{{ documento.codCriador }}</td>
+              <td>{{ documento.nomCriador }}</td>
+              <td>{{ documento.nomFazenda }}</td>
+              <td>{{ documento.nomDocumento }}</td>
+              <td>{{ documento.mes }}</td>
+              <td>{{ documento.ano }}</td>
+              <td>{{ documento.numero }}</td>
+              <td>{{ documento.raca }}</td>
+              <td>{{ documento.categoria }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </p-tabPanel>
+
+  <!-- 2ª Aba -->
+  <p-tabPanel header="Documentos Emitidos via Papel" class="divDadosAnimal">
+    <div class="grid pt-2">
+      <div class="col-3"></div>
+
+      <p-divider class="p-2" layout="vertical"></p-divider>
+
+      <div class="col-8 divDadosAnimal">
+        <!-- [tableStyle]="{ 'min-width': '50rem' }" -->
+        <p-table
+          [value]="documentosAbertos"
+          [style]="{ width: '105%' }"
+          [styleClass]="'p-datatable-sm'"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Criador</th>
+              <th>Nome do Criador</th>
+              <th>Nome da Fazenda</th>
+              <th>Documento</th>
+              <th>Mês</th>
+              <th>Ano</th>
+              <th>Número</th>
+              <th>Raça</th>
+              <th>Categoria</th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-documento>
+            <tr>
+              <td>{{ documento.codCriador }}</td>
+              <td>{{ documento.nomCriador }}</td>
+              <td>{{ documento.codFazenda }}</td>
+              <td>{{ documento.nomFazenda }}</td>
+              <td>{{ documento.cidade }}</td>
+              <td>{{ documento.uf }}</td>
+              <td>{{ documento.uf }}</td>
+              <td>{{ documento.uf }}</td>
+              <td>{{ documento.uf }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </p-tabPanel>
+</p-tabView>

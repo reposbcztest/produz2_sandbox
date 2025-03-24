@@ -1,0 +1,95 @@
+/* Animação para se carregar os itens iniciais da tela */
+.divDadosAnimal {
+  animation: scalein 1s ease-in-out;
+
+  @keyframes scalein {
+    0% {
+      opacity: 0;
+      transform: scaleY(0.8);
+      transition: transform 0.12s cubic-bezier(0, 0, 0.2, 1),
+        opacity 0.12s cubic-bezier(0, 0, 0.2, 1);
+    }
+    100% {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+  };
+}
+
+:host ::ng-deep .p-dropdown {
+  width: 10rem;
+}
+
+.ajusteAlturaDiv {
+  margin-top: -1.8em;
+}
+
+.divHorizontal {
+  margin-top: 1em;
+}
+
+.divSituações {
+  margin-top: 2.5em;
+}
+
+.ajusteLabel {
+  margin-top: -1em;
+}
+
+.ajusteTexto {
+  margin-top: -2.2em;
+}
+
+.registro {
+  font-family: arial;
+  font-weight: 600;
+  padding-left: 10px;
+  color: royalblue;
+  /* color: violet; */
+}
+
+.textoDestaque {
+  font-family: arial;
+  font-weight: 600;
+  font-size: small;
+  color: red;
+}
+
+.textoAv {
+  font-family: arial;
+  font-weight: 600;
+  color: red;
+  text-align: center;
+}
+
+#deca {
+  width: 4rem;
+}
+
+#iabcz {
+  width: 4rem;
+}
+
+#F {
+  width: 4rem;
+}
+
+#divFoto:hover {
+  opacity: 50%;
+}
+
+#cardPai:hover {
+  opacity: 50%;
+}
+
+#cardMae:hover {
+  opacity: 50%;
+}
+
+.disabledStyle{
+  background-color: #eeeee0;  
+}
+
+.comercialPMGZC {
+  width: 9rem;
+}

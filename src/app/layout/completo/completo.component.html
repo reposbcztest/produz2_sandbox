@@ -1,0 +1,293 @@
+<header>
+
+  <!-- Licenciado Padrão -->
+  <p-dialog
+    [(visible)]="mostraLicenciado"
+    [style]="{ width: '15vw', top: '3vw', margin: '2vw' }"
+    position="top-right"
+    [draggable]="false"
+    header="Licenciado Padrão"
+  >
+    <!-- Proprietário -->
+    <div class="col" style="margin-top: 10px">
+      <span class="p-float-label">
+        <p-dropdown
+          [options]="proprietarios"
+          [(ngModel)]="proprietarioSelecionado"
+          optionLabel="name"
+          [filter]="true"
+          filterBy="name"
+          [showClear]="true"
+          placeholder="Proprietário"
+          inputId="proprietario"
+          [style]="{ width: '100%' }"
+          [resetFilterOnHide]="true"
+          appendTo="body"
+        >
+          <ng-template pTemplate="selectedItem">
+            <div *ngIf="proprietarioSelecionado">
+              <div>
+                {{ proprietarioSelecionado.name }}
+              </div>
+            </div>
+          </ng-template>
+          <ng-template let-proprietario pTemplate="item">
+            <div class="proprietario-item">
+              <div>{{ proprietario.name }}</div>
+            </div>
+          </ng-template>
+        </p-dropdown>
+        <label>Proprietário (*)</label>
+      </span>
+    </div>
+
+    <!-- Fazenda -->
+    <div class="col" style="margin-top: 10px">
+      <span class="p-float-label">
+        <p-dropdown
+          [options]="fazendas"
+          [(ngModel)]="fazendaSelecionada"
+          optionLabel="name"
+          [filter]="true"
+          filterBy="name"
+          [showClear]="true"
+          placeholder="Fazenda"
+          inputId="fazenda"
+          [style]="{ width: '100%' }"
+          [resetFilterOnHide]="true"
+          appendTo="body"
+        >
+          <ng-template pTemplate="selectedItem">
+            <div *ngIf="fazendaSelecionada">
+              <div>
+                {{ fazendaSelecionada.name }}
+              </div>
+            </div>
+          </ng-template>
+          <ng-template let-fazenda pTemplate="item">
+            <div class="fazenda-item">
+              <div>{{ fazenda.name }}</div>
+            </div>
+          </ng-template>
+        </p-dropdown>
+        <label>Fazenda (*)</label>
+      </span>
+    </div>
+
+    <!-- Raca -->
+    <div class="col" style="margin-top: 10px">
+      <span class="p-float-label">
+        <p-dropdown
+          [options]="racas"
+          [(ngModel)]="racaSelecionada"
+          optionLabel="nomeFiltro"
+          [filter]="true"
+          filterBy="nomeFiltro"
+          [showClear]="true"
+          placeholder="Raça"
+          inputId="raca"
+          [style]="{ width: '100%' }"
+          [resetFilterOnHide]="true"
+          appendTo="body"
+        >
+          <ng-template pTemplate="selectedItem">
+            <div *ngIf="racaSelecionada">
+              <div>
+                {{ racaSelecionada.nomeFiltro }}
+              </div>
+            </div>
+          </ng-template>
+          <ng-template let-raca pTemplate="item">
+            <div class="raca-item">
+              <div>{{ raca.nomeFiltro }}</div>
+            </div>
+          </ng-template>
+        </p-dropdown>
+        <label>Raça (*)</label>
+      </span>
+    </div>
+
+    <!-- Categoria -->
+    <div class="col" style="margin-top: 10px">
+      <span class="p-float-label">
+        <p-dropdown
+          [options]="categorias"
+          [(ngModel)]="categoriaSelecionada"
+          optionLabel="nomeFiltro"
+          [filter]="true"
+          filterBy="nomeFiltro"
+          [showClear]="true"
+          placeholder="Categoria"
+          inputId="categoria"
+          [style]="{ width: '100%' }"
+          [resetFilterOnHide]="true"
+          appendTo="body"
+        >
+          <ng-template pTemplate="selectedItem">
+            <div *ngIf="categoriaSelecionada">
+              <div>
+                {{ categoriaSelecionada.nomeFiltro }}
+              </div>
+            </div>
+          </ng-template>
+          <ng-template let-categoria pTemplate="item">
+            <div class="categoria-item">
+              <div>{{ categoria.nomeFiltro }}</div>
+            </div>
+          </ng-template>
+        </p-dropdown>
+        <label>Categoria (*)</label>
+      </span>
+    </div>
+
+    <!-- Variedade -->
+    <div class="col flex gap-1">
+      <p-checkbox
+        name="group1"
+        value="Variedade"
+        [(ngModel)]="opcoesLicenciado"
+        inputId="variedade"
+      ></p-checkbox>
+      <label for="ny">Variedade</label>
+    </div>
+
+    <!-- Filtrar Animais Ativos -->
+    <div class="col flex gap-1">
+      <p-checkbox
+        name="group1"
+        value="Filtrar Animais Ativos"
+        [(ngModel)]="opcoesLicenciado"
+        inputId="animaisAtivos"
+      ></p-checkbox>
+      <label for="sf">Filtrar Animais Ativos</label>
+    </div>
+
+    <!-- CCG -->
+    <div class="col flex gap-1">
+      <p-checkbox
+        name="group1"
+        value="CCG"
+        [(ngModel)]="opcoesLicenciado"
+        inputId="ccg"
+      ></p-checkbox>
+      <label for="la">CCG</label>
+    </div>
+
+    <!-- Botões -->
+    <div class="flex justify-content-center gap-2">
+      <p-button label="Ok" (click)="attLicenciadoModal()"></p-button>
+      <p-button label="Cancel" (click)="mostraLicenciado = false"></p-button>
+    </div>
+  </p-dialog>
+
+  <!-- Notificações -->
+  <p-dialog
+    [(visible)]="mostraNotificacao"
+    [style]="{ width: '18vw', top: '4.5vw', margin: '0.6vw' }"
+    position="top-right"
+    [draggable]="false"
+    header="Notificações"
+  >
+    <div class="col">
+      <div style="float: left; padding: 1em">
+        <img src="/assets/images/icon/favicon.ico" />
+      </div>
+      <div style="height: 1em; padding: 0.7em">
+        <a href="/assets/documents/AtualizacoesProduz.pdf" target="_blank"
+          >Atualizações da Última Versão</a
+        >
+      </div>
+    </div>
+  </p-dialog>
+
+  <div class="grid" style="height: 3.5em">
+    <div class="col" style="padding: 0em">
+      <p-menubar [model]="items">
+        <ng-template pTemplate="start">
+          <div style="padding-right: 15px">
+            <img
+              src="/assets/images/icon/abcz-white.ico"
+              style="padding: 0.5em 0 0 1em; width: 3.3em"
+            />
+          </div>
+        </ng-template>
+        <ng-template pTemplate="end">
+          <div class="grid" style="margin-top: 1px">
+            <!-- <div class="col">
+              <p-menubar [model]="settings"></p-menubar>
+            </div> -->
+
+            <button
+              pButton
+              id="config"
+              type="button"
+              icon="pi pi-wrench"
+              class="p-button-text font-bold configButton"
+              (click)="configuracoes()"
+            ></button>
+
+            <div class="col">
+              <button
+                pButton
+                type="button"
+                label="Sair"
+                icon="pi pi-sign-out"
+                class="p-button-text font-bold exitButton"
+                (click)="sair()"
+                style="margin-top: 5px"
+              ></button>
+            </div>
+          </div>
+        </ng-template>
+      </p-menubar>
+    </div>
+  </div>
+</header>
+
+<div class="grid">
+  <div class="col-12">
+    <p-tabView
+      id="BarraAbas"
+      [(activeIndex)]="abaSelecionada"
+      [controlClose]="true"
+      (onClose)="fecharAba($event)"
+    >
+      <p-tabPanel
+        header="{{ aba.label }}"
+        [closable]="true"
+        *ngFor="let aba of abas; let i = index"
+        [selected]="aba.selected"
+      >
+        <iframe
+          id="corpo"
+          [frameBorder]="0"
+          class="corpo"
+          [src]="aba.url | safe"
+          style="padding-top: 10px"
+        ></iframe>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+</div>
+
+<div class="grid">
+  <div class="col-10"></div>
+
+  <div class="col-2" [hidden]="mostraConfiguracoes" style="margin-top: -20px">
+    <div class="grid">
+      <div class="col-12" style="border-style: hidden">
+        <p-menubar class="subMenuLateral" [model]="menuConfig"></p-menubar>
+      </div>
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
+
+<div id="atualizacao" class="atualizacao">
+  <p-badge [value]="'Existe uma nova versão do Produz disponível.'"></p-badge>
+</div>
+
+<footer>
+  <div class="footer"></div>
+</footer>

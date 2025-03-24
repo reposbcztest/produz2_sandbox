@@ -1,0 +1,233 @@
+<!-- style="border-style: solid" -->
+<div class="grid">
+  <!-- Coluna da Esquerda -->
+  <div class="col-1">
+    <div>
+      <!-- Botões-->
+      <p-tieredMenu [model]="itemsMenu"></p-tieredMenu>
+    </div>
+  </div>
+  <div class="col-10">
+    <div class="grid divHorizontal">
+      <!-- Proprietário -->
+      <div class="col">
+        <span class="p-float-label">
+          <p-dropdown
+            [options]="proprietarios"
+            [(ngModel)]="proprietarioSelecionado"
+            optionLabel="name"
+            [filter]="true"
+            filterBy="name"
+            [showClear]="true"
+            placeholder="Proprietário"
+            inputId="proprietario"
+            [style]="{ width: '100%' }"
+            [resetFilterOnHide]="true"
+          >
+            <ng-template pTemplate="selectedItem">
+              <div *ngIf="proprietarioSelecionado">
+                <div>
+                  {{ proprietarioSelecionado.name }}
+                </div>
+              </div>
+            </ng-template>
+            <ng-template let-proprietario pTemplate="item">
+              <div class="proprietario-item">
+                <div>{{ proprietario.name }}</div>
+              </div>
+            </ng-template>
+          </p-dropdown>
+          <label>Proprietário (*)</label>
+        </span>
+      </div>
+
+      <!-- Fazenda -->
+      <div class="col">
+        <span class="p-float-label">
+          <p-dropdown
+            [options]="fazendas"
+            [(ngModel)]="fazendaSelecionada"
+            optionLabel="name"
+            [filter]="true"
+            filterBy="name"
+            [showClear]="true"
+            placeholder="Fazenda"
+            inputId="fazenda"
+            [style]="{ width: '100%' }"
+            [resetFilterOnHide]="true"
+          >
+            <ng-template pTemplate="selectedItem">
+              <div *ngIf="fazendaSelecionada">
+                <div>
+                  {{ fazendaSelecionada.name }}
+                </div>
+              </div>
+            </ng-template>
+            <ng-template let-fazenda pTemplate="item">
+              <div class="fazenda-item">
+                <div>{{ fazenda.name }}</div>
+              </div>
+            </ng-template>
+          </p-dropdown>
+          <label>Fazenda (*)</label>
+        </span>
+      </div>
+    </div>
+
+    <div class="grid divHorizontal">
+      <!-- Raca -->
+      <div class="col-6">
+        <span class="p-float-label">
+          <p-dropdown
+            [options]="racas"
+            [(ngModel)]="racaSelecionada"
+            optionLabel="nomeFiltro"
+            [filter]="true"
+            filterBy="nomeFiltro"
+            [showClear]="true"
+            placeholder="Raça"
+            inputId="raca"
+            [style]="{ width: '100%' }"
+            [resetFilterOnHide]="true"
+          >
+            <ng-template pTemplate="selectedItem">
+              <div *ngIf="racaSelecionada">
+                <div>
+                  {{ racaSelecionada.nomeFiltro }}
+                </div>
+              </div>
+            </ng-template>
+            <ng-template let-raca pTemplate="item">
+              <div class="raca-item">
+                <div>{{ raca.nomeFiltro }}</div>
+              </div>
+            </ng-template>
+          </p-dropdown>
+          <label>Raça (*)</label>
+        </span>
+      </div>
+
+      <!-- Categoria -->
+      <div class="col-6">
+        <span class="p-float-label">
+          <p-dropdown
+            [options]="categorias"
+            [(ngModel)]="categoriaSelecionada"
+            optionLabel="nomeFiltro"
+            [filter]="true"
+            filterBy="nomeFiltro"
+            [showClear]="true"
+            placeholder="Categoria"
+            inputId="categoria"
+            [style]="{ width: '100%' }"
+            [resetFilterOnHide]="true"
+          >
+            <ng-template pTemplate="selectedItem">
+              <div *ngIf="categoriaSelecionada">
+                <div>
+                  {{ categoriaSelecionada.nomeFiltro }}
+                </div>
+              </div>
+            </ng-template>
+            <ng-template let-categoria pTemplate="item">
+              <div class="categoria-item">
+                <div>{{ categoria.nomeFiltro }}</div>
+              </div>
+            </ng-template>
+          </p-dropdown>
+          <label>Categoria (*)</label>
+        </span>
+      </div>
+    </div>
+
+    <div class="grid divHorizontal">
+      <!-- Serie -->
+      <div class="col">
+        <span class="p-float-label">
+          <input
+            type="text"
+            pInputText
+            class="p-inputtext"
+            value="{{ serie }}"
+            [style]="{ width: '100%' }"
+          />
+          <label>Série</label>
+        </span>
+      </div>
+
+      <!-- RGN -->
+      <div class="col">
+        <span class="p-float-label">
+          <input
+            type="text"
+            pInputText
+            class="p-inputtext"
+            value="{{ rgn }}"
+            [style]="{ width: '100%' }"
+          />
+          <label>RGN</label>
+        </span>
+      </div>
+
+      <!-- RGD -->
+      <div class="col">
+        <span class="p-float-label">
+          <input
+            type="text"
+            pInputText
+            class="p-inputtext"
+            value="{{ rgd }}"
+            [style]="{ width: '100%' }"
+          />
+          <label>RGD</label>
+        </span>
+      </div>
+    </div>
+
+    <div class="grid divHorizontal">
+      <!-- Sexo -->
+      <div class="col-2">
+        <span class="p-float-label">
+          <p-dropdown
+            inputId="sexo"
+            [autoDisplayFirst]="false"
+            [options]="sexos"
+            [(ngModel)]="sexoSelecionado"
+            optionLabel="name"
+            [style]="{ width: '100%' }"
+          ></p-dropdown>
+          <label>Sexo (*)</label>
+        </span>
+      </div>
+
+      <!-- Tipo do Produto -->
+      <div class="col-4">
+        <span class="p-float-label">
+          <p-dropdown
+            inputId="tipoProduto"
+            [autoDisplayFirst]="false"
+            [options]="tiposProduto"
+            [(ngModel)]="tipoProdutoSelecionado"
+            optionLabel="name"
+            [style]="{ width: '100%' }"
+          ></p-dropdown>
+          <label>Tipo do Produto (*)</label>
+        </span>
+      </div>
+
+      <!-- Nome -->
+      <div class="col-6">
+        <span class="p-float-label">
+          <input
+            type="text"
+            pInputText
+            class="p-inputtext"
+            value="{{ nomeProduto?.nome }}"
+            [style]="{ width: '100%' }"
+          />
+          <label>Nome (*)</label>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
